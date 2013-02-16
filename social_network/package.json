@@ -1,5 +1,5 @@
 {
-	"name": "my-social-network",
+	"name": "social_network",
 	"version": "0.0.1",
 	"private": true,
 	"dependencies" : {
