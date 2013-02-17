@@ -1,0 +1,9 @@
+module.exports = function() {
+	return {
+	    "service": "Gmail",
+	    "auth": {
+	        "user": "gmail.user@gmail.com",
+	        "pass": "userpass"
+	    }
+    };
+};
