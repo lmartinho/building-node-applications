@@ -64,7 +64,7 @@ app.post('/login', function(req, res) {
 		return;
 	}
 
-	Conta.login(email, password, function(success) {
+	Conta.entrar(email, password, function(success) {
 		if(!success) {
 			res.send(401);
 			return;
