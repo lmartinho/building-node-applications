@@ -6,7 +6,7 @@ define(['views/index', 'views/register', 'views/login', 'views/forgot_password']
 			'index': 'index',
 			'login': 'login',
 			'register': 'register',
-			'forgot_password': 'forgot_password'
+			'forgot-password': 'forgot_password'
 		},
 
 		changeView: function(view) {
