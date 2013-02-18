@@ -36,7 +36,7 @@ module.exports = function(config, mongoose, nodemailer) {
 	};
 
 	var esqueciPassword = function(email, resetPasswordUrl, callback) {
-		var user = Account.findOne({email: email}, function findAccount(err, doc) {
+		var user = Conta.findOne({email: email}, function findAccount(err, doc) {
 			if(err) {
 				// Email address is not a valid user
 				callback(false);
@@ -63,7 +63,7 @@ module.exports = function(config, mongoose, nodemailer) {
 		var shaSum = crypto.createHash('sha256');
 		shaSum.update(password);
 
-		Account.findOne({email: email, password: shaSum.digest('hex')}, function(err, doc) {
+		Conta.findOne({email: email, password: shaSum.digest('hex')}, function(err, doc) {
 			callback(doc != null);
 		});
 	};
