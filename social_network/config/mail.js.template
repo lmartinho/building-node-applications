@@ -1,3 +1,4 @@
+// @todo: need to understand how to define this mail config file
 module.exports = function() {
 	return {
 	    "service": "Gmail",
@@ -6,4 +7,4 @@ module.exports = function() {
 	        "pass": "userpass"
 	    }
     };
-};
+}();
