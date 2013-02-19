@@ -8,14 +8,18 @@ define(['SocialNetView', 'text!templates/profile.html', 'text!templates/status.h
 			},
 
 			render: function() {
-				this.$el.html(_.template(profileTemplate.this.model.toJSON()));
+				console.log('rendering profile view');
+				this.$el.html(_.template(profileTemplate, this.model.toJSON()));
 
 				var statusCollection = this.model.get('status');
+				console.log('status collection: ', statusCollection);
+
 				if(statusCollection != null) {
 					_.each(statusCollection, function(statusJson) {
 						var statusModel = new Status(statusJson);
-						var statusHtml = (new StatusView({models: statusModel})).render().el;
-						$(statusHtml).prependTo('.status_list').hide().fadeIn('slow');
+						var statusHtml = (new StatusView({model: statusModel})).render().el;
+						console.log(statusHtml);
+						$(statusHtml).prependTo('.status-list').hide().fadeIn('slow');
 					});
 				}
 			}
@@ -23,4 +27,4 @@ define(['SocialNetView', 'text!templates/profile.html', 'text!templates/status.h
 
 		return profileView;
 	}
-});
+);

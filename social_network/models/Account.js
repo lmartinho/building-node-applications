@@ -1,5 +1,15 @@
-module.exports = function(config, mongoose, nodemailer) {
+// exposing API in pt-PT to deviate from the book's code just enough to get into trouble,
+// also because I can
+module.exports = function(config, mongoose, Status, nodemailer) {
 	var crypto = require('crypto');
+
+	var Status = new mongoose.Schema({
+		name: {
+			first: {type: String},
+			last: {type: String}
+		},
+		status: {type: String}
+	})
 
 	var EsquemaDeConta = new mongoose.Schema({
 		email: {type: String, unique: true},
@@ -14,7 +24,9 @@ module.exports = function(config, mongoose, nodemailer) {
 			year: {type: Number},
 		},
 		photoUrl : {type: String},
-		biography : {type: String}
+		biography : {type: String},
+		status: [Status], // the account's own status updates
+		activity: [Status] // all status updates, including friends
 	});
 
 	var Conta = mongoose.model('Conta', EsquemaDeConta);
@@ -64,7 +76,7 @@ module.exports = function(config, mongoose, nodemailer) {
 		shaSum.update(password);
 
 		Conta.findOne({email: email, password: shaSum.digest('hex')}, function(err, doc) {
-			callback(doc != null);
+			callback(doc);
 		});
 	};
 
@@ -85,11 +97,18 @@ module.exports = function(config, mongoose, nodemailer) {
 		console.log('Save command was sent');
 	};
 
+	var encontrarPorId = function(accountId, callback) {
+		Conta.findOne({_id: accountId}, function(err, doc) {
+			callback(doc);
+		});
+	};
+
 	return {
 		registar: registar,
 		esqueciPassword: esqueciPassword,
 		mudarPassword: mudarPassword,
 		entrar: entrar,
+		encontrarPorId: encontrarPorId,
 		Conta: Conta
 	};
 }
