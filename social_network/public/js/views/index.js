@@ -35,7 +35,7 @@ define(['SocialNetView', 'text!templates/index.html', 'views/status', 'models/St
 					url: '/accounts/me/status',
 					data: { status: statusText },
 					success: function(data) {
-					statusCollection.add(new Status({status: statusText}));
+						statusCollection.add(new Status({status: statusText}));
 					},
 					error: function() {
 						console.warn('problem adding status');
